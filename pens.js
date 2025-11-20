@@ -1,76 +1,56 @@
+// COURBES
+
+// ----------------------------------------------------
+let DESSIN = 84;
+
+// ----------------------------------------------------
+let NP = 480,
+  PI = Math.PI;
+let N = 3000,
+  T1 = 1,
+  T2 = 150,
+  K1 = 1,
+  K2 = 1,
+  R1 = NP * 0.25;
+
+// ----------------------------------------------------
 function setup() {
-  createCanvas(800, 800);
-  noLoop();
-}
+  INIT2(720);
+  background_(255);
+  noFill_();
 
-function draw() {
-  background(255);
-  translate(width / 2, height / 2);
-
-  // Pen 1 (Blue): Golden spiral with triangles
-  stroke(30, 144, 255);
-  strokeWeight(2);
-  noFill();
-
-  let a = 4;
-  let b = 0.25;
-  let bluePoints = [];
-
-  // Generate all points first
-  for (let theta = 0; theta < 6 * PI; theta += 0.15) {
-    let r = a * exp(b * theta);
-    let x = r * cos(theta);
-    let y = r * sin(theta);
-    bluePoints.push({ x: x, y: y });
+  // build vertices for the parametric curve
+  let verts = [];
+  for (let I = 0; I < N; I++) {
+    let R2 = NP * 0.25 * (0.5 + 0.5 * cos((I * PI) / N));
+    let A1 = ((2 * PI * I) / N) * T1,
+      A2 = ((2 * PI * I) / N) * T2;
+    let X = int(NP * 0.5 + R1 * cos(K1 * A1) + R2 * cos(A2));
+    let Y = int(1.3 * (NP * 0.5 + R1 * sin(K2 * A1) + R2 * sin(A2)));
+    verts.push({ x: X, y: Y });
   }
 
-  // Draw triangles with perfectly aligned vertices
-  for (let i = 0; i < bluePoints.length - 1; i++) {
-    let p1 = bluePoints[i];
-    let p2 = bluePoints[i + 1];
+  // Draw with alternating colors - switch color for each line segment
+  let colorEven = [220, 20, 60];
+  let colorOdd = [30, 144, 255];
 
-    let angle = atan2(p2.y - p1.y, p2.x - p1.x);
-    let edgeLength = dist(p1.x, p1.y, p2.x, p2.y);
+  strokeWeight(1);
+  beginShape_();
+  for (let i = 0; i < verts.length; i++) {
+    // Switch stroke color based on index
+    if (i % 2 == 0) {
+      stroke_(colorEven);
+    } else {
+      stroke_(colorOdd);
+    }
 
-    // Third vertex perpendicular to the spiral edge
-    let x3 = p2.x + cos(angle + HALF_PI) * edgeLength * 0.8;
-    let y3 = p2.y + sin(angle + HALF_PI) * edgeLength * 0.8;
-
-    triangle(p1.x, p1.y, p2.x, p2.y, x3, y3);
+    // Draw line segment from previous point to current point
+    if (i > 0) {
+      vertex_(verts[i - 1].x, verts[i - 1].y);
+      vertex_(verts[i].x, verts[i].y);
+      endShape_();
+      beginShape_();
+    }
   }
-
-  // Pen 2 (Red): Opposing golden spiral with triangles
-  stroke(220, 20, 60);
-  strokeWeight(2);
-  noFill();
-
-  let redPoints = [];
-
-  // Generate all points first
-  for (let theta = 0; theta < 6 * PI; theta += 0.15) {
-    let r = a * exp(b * theta);
-    let x = r * cos(-theta + PI);
-    let y = r * sin(-theta + PI);
-    redPoints.push({ x: x, y: y });
-  }
-
-  // Draw triangles with perfectly aligned vertices
-  for (let i = 0; i < redPoints.length - 1; i++) {
-    let p1 = redPoints[i];
-    let p2 = redPoints[i + 1];
-
-    let angle = atan2(p2.y - p1.y, p2.x - p1.x);
-    let edgeLength = dist(p1.x, p1.y, p2.x, p2.y);
-
-    // Third vertex perpendicular to the spiral edge
-    let x3 = p2.x + cos(angle - HALF_PI) * edgeLength * 0.8;
-    let y3 = p2.y + sin(angle - HALF_PI) * edgeLength * 0.8;
-
-    triangle(p1.x, p1.y, p2.x, p2.y, x3, y3);
-  }
-
-  // Pen 1 (Blue): Center marker
-  stroke(30, 144, 255);
-  fill(30, 144, 255);
-  circle(0, 0, 8);
+  endShape_();
 }
