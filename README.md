@@ -1,7 +1,7 @@
 # P5JSCours
 
-Trois sketchs p5.js différents !
+Three different p5.js sketches demonstrating various visual effects:
 
-- Cercle d'étoiles arc-en-ciel avec effets géométriqe 3D [index.html](https://ilandevinci.github.io/P5JSCours/)
-- Red and blue swirling [pens.html](https://ilandevinci.github.io/P5JSCours/pens.html)
-- An interactive spinning rainbow [tesseract.html](https://ilandevinci.github.io/P5JSCours/tesseract.html)
+- Rainbow star circle with 3D geometric effects [index.html](https://ilandevinci.github.io/P5JSCours/)
+- Red and blue swirling curves [pens.html](https://ilandevinci.github.io/P5JSCours/pens.html)
+- A shockwave on a surface, animated [onde.html](https://ilandevinci.github.io/P5JSCours/onde.html)

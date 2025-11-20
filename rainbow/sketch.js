@@ -1,3 +1,6 @@
+//Ilan Maouchi 2025
+//ilan.maouchi@gmail.com
+
 let NP = 480;
 
 function setup() {

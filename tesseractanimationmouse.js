@@ -1,3 +1,6 @@
+//Ilan Maouchi 2025
+//ilan.maouchi@gmail.com
+
 let NP = 800;
 let angle = 0;
 let vertices4D = [];

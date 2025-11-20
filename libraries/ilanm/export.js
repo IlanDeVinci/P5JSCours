@@ -1,5 +1,7 @@
 // Refactored export system with reliable SVG and DXF generation
 // Fixed state management and canvas preservation
+//Ilan Maouchi 2025
+//ilan.maouchi@gmail.com
 
 // ============================================================================
 // UTILITY FUNCTIONS

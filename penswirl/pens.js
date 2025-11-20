@@ -1,4 +1,6 @@
 // COURBES
+//Ilan Maouchi 2025
+//ilan.maouchi@gmail.com
 
 // ----------------------------------------------------
 let DESSIN = 84;
@@ -7,10 +9,10 @@ let DESSIN = 84;
 let NP = 480,
   PI = Math.PI;
 let N = 3000,
-  T1 = 1,
+  T1 = 1.5, //
   T2 = 150,
-  K1 = 1,
-  K2 = 1,
+  K1 = -1.05,
+  K2 = 1.5,
   R1 = NP * 0.25;
 
 // ----------------------------------------------------
@@ -19,7 +21,7 @@ function setup() {
   background_(255);
   noFill_();
 
-  // build vertices for the parametric curve
+  // vertex pour stocker les points
   let verts = [];
   for (let I = 0; I < N; I++) {
     let R2 = NP * 0.25 * (0.5 + 0.5 * cos((I * PI) / N));
@@ -30,21 +32,21 @@ function setup() {
     verts.push({ x: X, y: Y });
   }
 
-  // Draw with alternating colors - switch color for each line segment
+  // Dessiner avec des couleurs alternées - changer la couleur pour chaque segment de ligne
   let colorEven = [220, 20, 60];
   let colorOdd = [30, 144, 255];
 
   strokeWeight(1);
   beginShape_();
   for (let i = 0; i < verts.length; i++) {
-    // Switch stroke color based on index
+    // Changer la couleur du trait en fonction de l'indice
     if (i % 2 == 0) {
       stroke_(colorEven);
     } else {
       stroke_(colorOdd);
     }
 
-    // Draw line segment from previous point to current point
+    // Dessiner un segment de ligne du point précédent au point actuel
     if (i > 0) {
       vertex_(verts[i - 1].x, verts[i - 1].y);
       vertex_(verts[i].x, verts[i].y);

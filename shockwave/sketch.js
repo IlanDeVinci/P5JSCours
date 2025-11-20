@@ -1,5 +1,7 @@
 // sketch.js
 // Surface animée inspirée du dessin 190
+//Ilan Maouchi 2025
+//ilan.maouchi@gmail.com
 
 let NP = 600; // taille du canevas utilisée comme référence NP d'après l'original
 let N = 80; // résolution de la grille (grille 80x80)
